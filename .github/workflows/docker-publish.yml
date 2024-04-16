@@ -52,7 +52,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/arm64,linux/amd64
           push: true
-          tags: ${{secrets.ALIYUN_REGISTRY}}/zixiai/fluentd-oss:${{ github.ref_name }}
+          tags: ${{secrets.ACR_REGISTRY}}/zixiai/fluentd-oss:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
