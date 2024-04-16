@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.16-1
+FROM fluent/fluentd:v1.16-debian-2
 
 # Use root account to use apk
 USER root
