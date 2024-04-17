@@ -8,7 +8,7 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && sudo gem install fluent-plugin-aliyun-oss \
- && sudo gem install fluent-plugin-s3 --no-document \
+ && sudo gem install aliyun-sdk -v 0.8.0 \
  && sudo gem sources --clear-all \
  && SUDO_FORCE_REMOVE=yes \
     apt-get purge -y --auto-remove \
