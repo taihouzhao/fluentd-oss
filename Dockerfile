@@ -21,6 +21,6 @@ RUN echo 'source "https://rubygems.org"' > Gemfile \
     && echo 'gem "fluent-plugin-aliyun-oss"' >> Gemfile \
     && echo 'gem "aliyun-sdk", "~> 0.8.0"' >> Gemfile
 
-RUN sudo bundle install
+RUN bundle install
 
 USER fluent
