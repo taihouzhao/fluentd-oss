@@ -2,13 +2,10 @@ FROM fluent/fluentd:v1.16-debian-2
 
 USER root
 
-# below RUN includes plugin as examples elasticsearch is not required
-# you may customize including plugins as you wish
 RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && sudo gem install fluent-plugin-aliyun-oss \
- && sudo gem install aliyun-sdk -v 0.8.0 \
+ && sudo gem install bundler \
  && sudo gem sources --clear-all \
  && SUDO_FORCE_REMOVE=yes \
     apt-get purge -y --auto-remove \
@@ -16,5 +13,14 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
                   $buildDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
+
+WORKDIR /etc/fluent
+
+RUN echo 'source "https://rubygems.org"' > Gemfile \
+    && echo 'gem "fluentd"' >> Gemfile \
+    && echo 'gem "fluent-plugin-aliyun-oss"' >> Gemfile \
+    && echo 'gem "aliyun-sdk", "~> 0.8.0"' >> Gemfile
+
+RUN sudo bundle install
 
 USER fluent
